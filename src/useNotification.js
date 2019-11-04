@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-const useNotification = () => {
+const useNotification = (config = {}) => {
   const [show, setShow] = useState(false);
+  const { closeTimeout = 3000, autoClose = true } = config;
 
   useEffect(() => {
     console.log('show: ', show);
@@ -9,18 +10,20 @@ const useNotification = () => {
 
   const ref = useCallback(
     node => {
+      let timeout = null;
       if (node !== null) {
         if (show) {
           node.style.display = 'block';
-          const timeout = setTimeout(() => {
+          timeout = setTimeout(() => {
             setShow(false);
-          }, 2000);
+          }, closeTimeout);
         } else {
           node.style.display = 'none';
+          clearTimeout(timeout);
         }
       }
     },
-    [show]
+    [show, closeTimeout]
   );
 
   return [

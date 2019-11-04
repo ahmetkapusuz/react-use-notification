@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -8,28 +8,38 @@ const Container = styled.div`
   overflow-y: auto;
   pointer-events: auto;
   position: fixed;
-  top: 0px;
+  bottom: 0px;
   right: 0px;
   padding: 8px;
+  ${props =>
+    props.hidden &&
+    css`
+      display: none !important;
+    `}
 `;
 
 const MessageContainer = styled.div`
-  background-color: rgb(227, 252, 239);
+  background-color: #dff0d8;
   box-shadow: rgba(0, 0, 0, 0.176) 0px 3px 8px;
-  color: rgb(0, 102, 68);
+  color: #3c763d;
   display: flex;
   margin-bottom: 8px;
   width: 360px;
   transform: translate3d(0px, 0px, 0px);
   border-radius: 4px;
-  transition: transform 220ms cubic-bezier(0.2, 0, 0, 1) 0s;
+  ${props =>
+    props.type === 'error' &&
+    css`
+      background-color: #f2dede;
+      color: #a94442;
+    `}
 `;
 
 const IconContainer = styled.div`
-  background-color: rgb(54, 179, 126);
+  background-color: #36b37e;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  color: rgb(227, 252, 239);
+  color: #e3fcef;
   flex-shrink: 0;
   padding-bottom: 8px;
   padding-top: 8px;
@@ -37,6 +47,12 @@ const IconContainer = styled.div`
   text-align: center;
   width: 30px;
   overflow: hidden;
+  ${props =>
+    props.type === 'error' &&
+    css`
+      background-color: #f06767;
+      color: #a94442;
+    `}
 `;
 
 const Icon = styled.div``;
@@ -58,15 +74,26 @@ const CloseButton = styled.div`
   transition: opacity 150ms ease 0s;
 `;
 
-const Notification = ({ containerRef, text }) => {
+const Notification = ({ containerRef, children, type = 'success' }) => {
+  const [isHidden, setIsHidden] = useState(false);
+  const [showClose, setShowClose] = useState(false);
+
   return (
     <Container ref={containerRef}>
-      <MessageContainer>
-        <IconContainer>
-          <Icon>&#10004;</Icon>
+      <MessageContainer type={type}>
+        <IconContainer type={type}>
+          {type === 'success' ? <Icon>&#10004;</Icon> : <Icon>&times;</Icon>}
         </IconContainer>
-        <TextContainer>{text}</TextContainer>
-        <CloseButton>&times;</CloseButton>
+        <TextContainer>{children}</TextContainer>
+        {showClose && (
+          <CloseButton
+            onClick={() => {
+              console.log('hidden: ', isHidden);
+            }}
+          >
+            &times;
+          </CloseButton>
+        )}
       </MessageContainer>
     </Container>
   );

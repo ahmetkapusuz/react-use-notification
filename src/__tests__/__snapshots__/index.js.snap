@@ -2,13 +2,15 @@
 
 exports[`Should render successfully 1`] = `
 <div
-  className="Notification__Container-sc-1kgx9f5-0 ekMjxr"
+  className="Notification__Container-sc-1kgx9f5-0 cQMxCI"
 >
   <div
-    className="Notification__MessageContainer-sc-1kgx9f5-1 bUxgjx"
+    className="Notification__MessageContainer-sc-1kgx9f5-1 igVdfe"
+    type="success"
   >
     <div
-      className="Notification__IconContainer-sc-1kgx9f5-2 kzeCtx"
+      className="Notification__IconContainer-sc-1kgx9f5-2 fvMaPp"
+      type="success"
     >
       <div
         className="Notification__Icon-sc-1kgx9f5-3 joNqKH"
@@ -18,11 +20,8 @@ exports[`Should render successfully 1`] = `
     </div>
     <div
       className="Notification__TextContainer-sc-1kgx9f5-4 becpoR"
-    />
-    <div
-      className="Notification__CloseButton-sc-1kgx9f5-5 dToYRu"
     >
-      ×
+      Notification
     </div>
   </div>
 </div>

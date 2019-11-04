@@ -3,7 +3,7 @@ import { Notification, useNotification } from '../index';
 import renderer from 'react-test-renderer';
 
 test('Should render successfully', () => {
-  const component = renderer.create(<Notification />);
+  const component = renderer.create(<Notification>Notification</Notification>);
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
