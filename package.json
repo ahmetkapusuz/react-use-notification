@@ -19,7 +19,7 @@
     "component",
     "ui",
     "notification",
-    "hookes",
+    "hooks",
     "styled-components"
   ],
   "license": "MIT",
